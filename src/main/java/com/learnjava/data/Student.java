@@ -1,13 +1,12 @@
 package com.learnjava.data;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
+
 
 public class Student {
 
@@ -23,5 +22,16 @@ public class Student {
         this.gpa = gpa;
         this.gender = gender;
         this.activities = activities;
+    }
+
+    public Student() {
+    }
+
+    public Student(String s) {
+        this.name = s;
+    }
+
+    public void printListOfActivities() {
+        System.out.println(activities);
     }
 }
