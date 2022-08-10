@@ -4,10 +4,9 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Data
-
-
 public class Student {
 
     private String name;
@@ -16,6 +15,7 @@ public class Student {
     private String gender;
     List<String> activities = new ArrayList<>();
     private int noteBooks;
+    private Optional<Bike> bike = Optional.empty();
 
     public Student(String name, int gradeLevel, double gpa, String gender, List<String> activities) {
         this.name = name;
