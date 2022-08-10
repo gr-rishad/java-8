@@ -6,7 +6,7 @@ import com.learnjava.data.StudentDatabase;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.*;
 
 public class StreamsGroupingByExample {
 
@@ -49,8 +49,26 @@ public class StreamsGroupingByExample {
                 StudentDatabase.getAllStudents().stream()
                         .collect(Collectors.groupingBy(Student::getGradeLevel, Collectors.maxBy(Comparator.comparing(Student::getGpa))));
         System.out.println(studentMap);
+    }
 
+    public static void calculateTopGpa() {
+        Map<Integer, Optional<Student>> studentMapOptional = StudentDatabase.getAllStudents().stream()
+                .collect(Collectors.groupingBy(Student::getGradeLevel, maxBy(Comparator.comparing(Student::getGpa))));
+        System.out.println(studentMapOptional);
 
+        Map<Integer, Student> studentMapOptional1 = StudentDatabase.getAllStudents().stream()
+                .collect(Collectors.groupingBy(Student::getGradeLevel, collectingAndThen(maxBy(Comparator.comparing(Student::getGpa)), Optional::get)));
+        System.out.println(studentMapOptional1);
+    }
+
+    public static void calculateLeastGpa() {
+        Map<Integer, Optional<Student>> studentMapOptional = StudentDatabase.getAllStudents().stream()
+                .collect(Collectors.groupingBy(Student::getGradeLevel, minBy(Comparator.comparing(Student::getGpa))));
+        System.out.println(studentMapOptional);
+
+        Map<Integer, Student> studentMapOptional1 = StudentDatabase.getAllStudents().stream()
+                .collect(Collectors.groupingBy(Student::getGradeLevel, collectingAndThen(minBy(Comparator.comparing(Student::getGpa)), Optional::get)));
+        System.out.println(studentMapOptional1);
     }
 
 
@@ -61,6 +79,8 @@ public class StreamsGroupingByExample {
         // twoLevelGrouping_1();
         // twoLevelGrouping_2();
         // threeArgumentGrouping();
-        GroupByMax();
+        // GroupByMax();
+        //calculateTopGpa();
+        //calculateLeastGpa();
     }
 }
